@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: ghartak-backend
+  datasource:
+    url: jdbc:h2:mem:ghartakdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: 9a2f8c4e6b1d5a7f9e3c8b2a4d6f8e0a1c3e5b7d9f2a4c6e8b0d2f4a6c8e0d1f
+  expirationMs: 86400000
+
+logging:
+  level:
+    root: INFO
+    com.ghartak: DEBUG

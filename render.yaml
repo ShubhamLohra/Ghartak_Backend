@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: ghartak-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/categories
+    envVars:
+      - key: PORT
+        value: 8080
