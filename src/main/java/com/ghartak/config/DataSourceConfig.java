@@ -15,6 +15,9 @@ public class DataSourceConfig {
     @Bean
     @Primary
     public DataSource dataSource() {
+        System.setProperty("user.timezone", "UTC");
+        java.util.TimeZone.setDefault(java.util.TimeZone.getTimeZone("UTC"));
+
         String rawUrl = System.getenv("SPRING_DATASOURCE_URL");
         if (rawUrl == null || rawUrl.trim().isEmpty()) {
             rawUrl = System.getenv("DATABASE_URL");
@@ -42,6 +45,7 @@ public class DataSourceConfig {
 
                     config.setJdbcUrl("jdbc:postgresql://" + host + ":" + port + database);
                     config.setDriverClassName("org.postgresql.Driver");
+                    config.addDataSourceProperty("options", "-c timezone=UTC");
 
                     if (uri.getUserInfo() != null) {
                         String[] credentials = uri.getUserInfo().split(":", 2);
@@ -55,6 +59,7 @@ public class DataSourceConfig {
                     return new HikariDataSource(config);
                 } catch (Exception e) {
                     System.err.println("Error parsing postgres URL: " + e.getMessage());
+                    e.printStackTrace();
                 }
             }
 
@@ -65,6 +70,7 @@ public class DataSourceConfig {
                 config.setDriverClassName(driver != null ? driver : "org.postgresql.Driver");
                 config.setUsername(System.getenv("SPRING_DATASOURCE_USERNAME"));
                 config.setPassword(System.getenv("SPRING_DATASOURCE_PASSWORD"));
+                config.addDataSourceProperty("options", "-c timezone=UTC");
                 config.setMaximumPoolSize(5);
                 System.out.println(">>> Configured Explicit JDBC DataSource: " + config.getJdbcUrl());
                 return new HikariDataSource(config);
