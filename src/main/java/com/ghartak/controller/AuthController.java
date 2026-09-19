@@ -67,7 +67,7 @@ public class AuthController {
         user.setFullName(registerRequest.getFullName());
         user.setPhone(registerRequest.getPhone());
         user.setAddress(registerRequest.getAddress());
-        user.setCity(registerRequest.getCity() != null ? registerRequest.getCity() : "Delhi NCR");
+        user.setCity(registerRequest.getCity() != null ? registerRequest.getCity() : "Hazaribagh (Main Town)");
         user.setPincode(registerRequest.getPincode());
         user.setRole(registerRequest.getRole() != null ? registerRequest.getRole() : Role.CUSTOMER);
         user.setProfession(registerRequest.getProfession());

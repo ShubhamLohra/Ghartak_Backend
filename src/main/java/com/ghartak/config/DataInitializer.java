@@ -45,29 +45,59 @@ public class DataInitializer implements CommandLineRunner {
         System.out.println(">>> Initializing Ghar Tak Database with Services & Seed Data...");
 
         // 1. Seed Users
-        User admin = new User("admin@ghartak.com", passwordEncoder.encode("admin123"), "GharTak Admin", "9876543210", "GharTak HQ, Sector 62", "Noida", "201301", Role.ADMIN);
+        User admin = new User("admin@ghartak.com", passwordEncoder.encode("admin123"), "GharTak Admin", "9876543210", "GharTak HQ, Main Road", "Hazaribagh", "825301", Role.ADMIN);
         userRepository.save(admin);
 
-        User customer = new User("user@ghartak.com", passwordEncoder.encode("user123"), "Shubham Kumar", "9811223344", "Flat 402, Royal Palms, Indirapuram", "Delhi NCR", "201014", Role.CUSTOMER);
+        User customer = new User("user@ghartak.com", passwordEncoder.encode("user123"), "Shubham Kumar", "9811223344", "Flat 402, Lake View Apartments, Matwari", "Hazaribagh", "825301", Role.CUSTOMER);
         userRepository.save(customer);
 
-        User worker1 = new User("rajesh.electric@ghartak.com", passwordEncoder.encode("worker123"), "Rajesh Kumar (Senior Electrician)", "9988776655", "Sector 18", "Delhi NCR", "201301", Role.SERVICE_PROVIDER);
-        worker1.setProfession("Electrician");
+        User worker1 = new User("rajesh.electric@ghartak.com", passwordEncoder.encode("worker123"), "Rajesh Kumar (Senior Electrician)", "9988776655", "Korrah Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+        worker1.setProfession("Electrician Services");
         worker1.setRating(4.9);
         worker1.setCompletedJobs(142);
         worker1.setTotalEarnings(63900.0);
         worker1.setDailyLeadsRemaining(3);
+        worker1.setCreatedAt(LocalDateTime.now().minusDays(180));
         userRepository.save(worker1);
 
-        User worker2 = new User("afrin.ceiling@ghartak.com", passwordEncoder.encode("worker123"), "Afrin Khan (False Ceiling Specialist)", "9955443322", "Connaught Place", "Delhi NCR", "110001", Role.SERVICE_PROVIDER);
-        worker2.setProfession("False Ceiling Specialist");
+        User worker2 = new User("afrin.ceiling@ghartak.com", passwordEncoder.encode("worker123"), "Afrin Khan (False Ceiling Specialist)", "9955443322", "Boddom Bazar", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+        worker2.setProfession("Interior & False Ceiling");
         worker2.setRating(4.95);
         worker2.setCompletedJobs(89);
         worker2.setTotalEarnings(124500.0);
         worker2.setDailyLeadsRemaining(3);
+        worker2.setCreatedAt(LocalDateTime.now().minusDays(120));
         userRepository.save(worker2);
 
-        User supplier = new User("supplier@ghartak.com", passwordEncoder.encode("supplier123"), "GharTak Hardware Depot Owner", "9899001122", "Main Industrial Area", "Delhi NCR", "110020", Role.SUPPLIER);
+        // Laundry Partners Enrolled
+        User laundryWorker1 = new User("ramesh.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Ramesh Sharma (Master Laundry Partner)", "9871122334", "Call Babu Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+        laundryWorker1.setProfession("Laundry & Dry Cleaning");
+        laundryWorker1.setRating(4.9);
+        laundryWorker1.setCompletedJobs(178);
+        laundryWorker1.setTotalEarnings(53400.0);
+        laundryWorker1.setDailyLeadsRemaining(3);
+        laundryWorker1.setCreatedAt(LocalDateTime.now().minusDays(210));
+        userRepository.save(laundryWorker1);
+
+        User laundryWorker2 = new User("sita.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Sita Verma (Express Steam Press Specialist)", "9872233445", "Canary Hill Road", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+        laundryWorker2.setProfession("Laundry & Dry Cleaning");
+        laundryWorker2.setRating(4.85);
+        laundryWorker2.setCompletedJobs(94);
+        laundryWorker2.setTotalEarnings(28200.0);
+        laundryWorker2.setDailyLeadsRemaining(3);
+        laundryWorker2.setCreatedAt(LocalDateTime.now().minusDays(90));
+        userRepository.save(laundryWorker2);
+
+        User plumberWorker = new User("suresh.plumber@ghartak.com", passwordEncoder.encode("worker123"), "Suresh Plumbing Works", "9873344556", "Demotand Area", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+        plumberWorker.setProfession("Plumbing Services");
+        plumberWorker.setRating(4.8);
+        plumberWorker.setCompletedJobs(112);
+        plumberWorker.setTotalEarnings(44800.0);
+        plumberWorker.setDailyLeadsRemaining(3);
+        plumberWorker.setCreatedAt(LocalDateTime.now().minusDays(150));
+        userRepository.save(plumberWorker);
+
+        User supplier = new User("supplier@ghartak.com", passwordEncoder.encode("supplier123"), "GharTak Hardware Depot Owner", "9899001122", "Industrial Estate, Pagmil", "Hazaribagh", "825301", Role.SUPPLIER);
         userRepository.save(supplier);
 
         // 2. Seed All 11 Service Categories & Sub-items (matching handwritten notes & logo)
@@ -111,7 +141,7 @@ public class DataInitializer implements CommandLineRunner {
         categoryRepository.save(building);
         serviceItemRepository.saveAll(Arrays.asList(
             new ServiceItem("Daily Helper Labour (02 Skilled Workers)", "Heavy lifting, material movement, site cleanup & masonry assistance", 850.0, 1100.0, "8 Hours", 4.8, 520, "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80", "per day", true, building),
-            new ServiceItem("Master Mason / Mistry (02 Specialists)", "Plastering, brickwork, tile fixing, beam patching & masonry repair", 1450.0, 1800.0, "8 Hours", 4.9, 430, "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=600&q=80", "per day", true, building),
+            new ServiceItem("Master Mason / Mistry (02 Specialists)", "Plastering, brickwork, tile fixing, beam patching & masonry repair", 1450.0, 1800.0, "8 Hours", 4.9, 430, "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80", "per day", true, building),
             new ServiceItem("General Building Contractor (01 Lead)", "Complete site supervision, material procurement management & execution plan", 2500.0, 3500.0, "Per Day Visit", 4.95, 190, "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80", "per visit", false, building),
             new ServiceItem("Chartered Civil Engineer Inspection (04 Expert Consultants)", "Structural audit, load assessment, blueprint review & safety certification", 3499.0, 4999.0, "Consultation", 5.0, 110, "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=600&q=80", "per project", true, building)
         ));
@@ -166,14 +196,23 @@ public class DataInitializer implements CommandLineRunner {
             new ServiceItem("HbA1c & Fasting Diabetes Monitor Panel", "Accurate glycated hemoglobin blood test with digital report within 12 hours", 349.0, 599.0, "30 mins", 4.9, 450, "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=600&q=80", "per sample", false, diagnostic)
         ));
 
+        // Category 12: Laundry & Dry Cleaning
+        ServiceCategory laundry = new ServiceCategory("Laundry & Dry Cleaning", "LAUNDRY", "Shirt", "Doorstep pickup for 5kg wash & fold, suit dry cleaning, steam press & shoe spa", "02 Partners Enrolled", "Home Care", "from-indigo-500 to-sky-600");
+        categoryRepository.save(laundry);
+        serviceItemRepository.saveAll(Arrays.asList(
+            new ServiceItem("5kg Wash & Fold Express Laundry", "Antiseptic washing, fabric softener, doorstep pickup & fold packaging", 249.0, 399.0, "24 Hours", 4.9, 410, "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=600&q=80", "per 5kg load", true, laundry),
+            new ServiceItem("Suit & Premium Coat Dry Cleaning", "Organic dry cleaning stain treatment, steam press & protective hanger bag", 399.0, 599.0, "48 Hours", 4.95, 290, "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80", "per suit", true, laundry),
+            new ServiceItem("Steam Press & Ironing (Set of 5 Shirts)", "Wrinkle-free high pressure steam press for formal shirts & trousers", 149.0, 249.0, "Same Day", 4.85, 530, "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80", "per 5 items", false, laundry)
+        ));
+
         // 3. Seed Raw Material Products
         rawMaterialRepository.saveAll(Arrays.asList(
             new RawMaterialProduct("UltraTech Cement 50kg", "Cement", "GharTak Authorized Store", 385.0, "bag", 4.9, true, 10, "Grade 53 PPC Weather Shield Cement", "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80"),
             new RawMaterialProduct("Tata Tiscon TMT Steel 12mm", "Steel TMT", "Shree Ram Steel Corp", 62.0, "kg", 4.95, true, 100, "Fe-550SD Grade Ductile Steel Bars", "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80"),
-            new RawMaterialProduct("Yamuna River Sand (100 cu.ft)", "Sand", "Balaji Sand Supplier", 4500.0, "brass", 4.8, true, 1, "Washed coarse river sand for concrete slab work", "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&w=600&q=80")
+            new RawMaterialProduct("Yamuna River Sand (100 cu.ft)", "Sand", "Balaji Sand Supplier", 4500.0, "brass", 4.8, true, 1, "Washed coarse river sand for concrete slab work", "https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=600&q=80")
         ));
 
-        // 4. Seed Provider Leads (matching notebook daily earnings note ₹450)
+        // 4. Seed Provider Leads
         leadRepository.saveAll(Arrays.asList(
             new ServiceLead("LEAD-901", "False Ceiling Specialist", "Afrin Customer Job", "9812345678", "South Ext Part 2", "1.8 km", 450.0, "Today 2:00 PM", "Living room 18x12 ft POP cove false ceiling design quote", "AVAILABLE"),
             new ServiceLead("LEAD-902", "Electrician Services", "Kapil Dev", "9823456789", "Indirapuram Sector 4", "3.1 km", 450.0, "Today 4:00 PM", "MCB tripping issue & 3 ceiling fan regulators replacement", "AVAILABLE"),
@@ -182,32 +221,77 @@ public class DataInitializer implements CommandLineRunner {
 
         // 5. Seed Reviews
         reviewRepository.saveAll(Arrays.asList(
-            new Review("Amit Verma", "Delhi NCR", 5.0, "False Ceiling Specialist", "Afrin team did an extraordinary job on our false ceiling! Clean finish, ambient lighting looks stunning."),
-            new Review("Priya Sharma", "Mumbai", 5.0, "Electrician Services", "Booked fan installation on Ghar Tak app in morning, electrician arrived in 25 minutes! Very polite & expert."),
-            new Review("Ramesh Builder", "Bengaluru", 4.9, "Building Repair & Construction", "Ordered 2 Mistry & 2 Labour through Ghar Tak app. Super efficient work and verified workers.")
+            new Review("Amit Verma", "Matwari, Hazaribagh", 5.0, "Laundry & Dry Cleaning", "Ramesh Sharma did a fantastic job with our suit dry cleaning in Matwari! Delivered on time, perfectly steam pressed."),
+            new Review("Priya Sharma", "Korrah, Hazaribagh", 5.0, "Electrician Services", "Booked fan installation on Ghar Tak app in morning, electrician arrived in 20 minutes at Korrah Chowk! Very polite & expert."),
+            new Review("Ramesh Builder", "Boddom Bazar, Hazaribagh", 4.9, "Building Repair & Construction", "Ordered 2 Mistry & 2 Labour through Ghar Tak app in Boddom Bazar. Super efficient work and verified local workers.")
         ));
 
-        // 6. Seed Initial Sample Booking
-        Booking sampleBooking = new Booking();
-        sampleBooking.setBookingCode("GT-782109");
-        sampleBooking.setCustomer(customer);
-        sampleBooking.setProvider(worker1);
-        sampleBooking.setServiceCategoryName("Electrician Services");
-        sampleBooking.setScheduledDate(LocalDateTime.now().plusHours(3));
-        sampleBooking.setScheduledTimeSlot("02:00 PM - 04:00 PM");
-        sampleBooking.setAddress("Flat 402, Royal Palms, Indirapuram");
-        sampleBooking.setCity("Delhi NCR");
-        sampleBooking.setPincode("201014");
-        sampleBooking.setContactPhone("9811223344");
-        sampleBooking.setInstructions("Please bring high-ladder for living room ceiling fan checkup.");
-        sampleBooking.setTotalAmount(548.0);
-        sampleBooking.setTaxesAndFee(49.0);
-        sampleBooking.setPaymentMethod("Cash on Delivery");
-        sampleBooking.setPaymentStatus("PENDING");
-        sampleBooking.setStatus(Booking.Status.BOOKED);
-        sampleBooking.getItems().add(new BookingItem("Ceiling Fan Repair & Installation", 199.0, 1, sampleBooking));
-        sampleBooking.getItems().add(new BookingItem("MCB & Switchboard Upgrade", 349.0, 1, sampleBooking));
-        bookingRepository.save(sampleBooking);
+        // 6. Seed Sample Bookings with Live Statuses
+        
+        // Booking 1: Laundry Service - IN_PROGRESS
+        Booking b1 = new Booking();
+        b1.setBookingCode("GT-982101");
+        b1.setCustomer(customer);
+        b1.setProvider(laundryWorker1);
+        b1.setServiceCategoryName("Laundry & Dry Cleaning");
+        b1.setScheduledDate(LocalDateTime.now().plusHours(1));
+        b1.setScheduledTimeSlot("10:00 AM - 12:00 PM");
+        b1.setAddress("Flat 402, Lake View Apartments, Matwari");
+        b1.setCity("Hazaribagh");
+        b1.setPincode("825301");
+        b1.setContactPhone("9811223344");
+        b1.setInstructions("Please handle woolens carefully during dry cleaning.");
+        b1.setTotalAmount(648.0);
+        b1.setTaxesAndFee(49.0);
+        b1.setPaymentMethod("UPI Payment");
+        b1.setPaymentStatus("PAID");
+        b1.setStatus(Booking.Status.IN_PROGRESS);
+        b1.getItems().add(new BookingItem("Suit & Premium Coat Dry Cleaning", 399.0, 1, b1));
+        b1.getItems().add(new BookingItem("5kg Wash & Fold Express Laundry", 249.0, 1, b1));
+        bookingRepository.save(b1);
+
+        // Booking 2: Electrician Service - EN_ROUTE
+        Booking b2 = new Booking();
+        b2.setBookingCode("GT-982102");
+        b2.setCustomer(customer);
+        b2.setProvider(worker1);
+        b2.setServiceCategoryName("Electrician Services");
+        b2.setScheduledDate(LocalDateTime.now().plusHours(2));
+        b2.setScheduledTimeSlot("02:00 PM - 04:00 PM");
+        b2.setAddress("House No 88, Near Canary Hill Road, Korrah");
+        b2.setCity("Hazaribagh");
+        b2.setPincode("825301");
+        b2.setContactPhone("9899112233");
+        b2.setInstructions("MCB tripping constantly when AC is turned on.");
+        b2.setTotalAmount(499.0);
+        b2.setTaxesAndFee(49.0);
+        b2.setPaymentMethod("Cash on Delivery");
+        b2.setPaymentStatus("PENDING");
+        b2.setStatus(Booking.Status.EN_ROUTE);
+        b2.getItems().add(new BookingItem("Full House Electric Checkup & Wiring Fix", 499.0, 1, b2));
+        bookingRepository.save(b2);
+
+        // Booking 3: Building Repair - COMPLETED
+        Booking b3 = new Booking();
+        b3.setBookingCode("GT-982103");
+        b3.setCustomer(customer);
+        b3.setProvider(worker2);
+        b3.setServiceCategoryName("Building Repair & Construction");
+        b3.setScheduledDate(LocalDateTime.now().minusDays(1));
+        b3.setScheduledTimeSlot("09:00 AM - 05:00 PM");
+        b3.setAddress("House No. 12, Boddom Bazar Main Road");
+        b3.setCity("Hazaribagh");
+        b3.setPincode("825301");
+        b3.setContactPhone("9877112233");
+        b3.setInstructions("Balcony plastering & safety column checkup.");
+        b3.setTotalAmount(4600.0);
+        b3.setTaxesAndFee(150.0);
+        b3.setPaymentMethod("UPI Payment");
+        b3.setPaymentStatus("PAID");
+        b3.setStatus(Booking.Status.COMPLETED);
+        b3.getItems().add(new BookingItem("Daily Helper Labour (02 Skilled Workers)", 850.0, 2, b3));
+        b3.getItems().add(new BookingItem("Master Mason / Mistry (02 Specialists)", 1450.0, 2, b3));
+        bookingRepository.save(b3);
 
         System.out.println(">>> Seed Data successfully loaded for Ghar Tak Backend!");
     }

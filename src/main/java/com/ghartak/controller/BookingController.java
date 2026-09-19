@@ -63,7 +63,7 @@ public class BookingController {
         booking.setScheduledDate(LocalDateTime.now().plusDays(1));
         booking.setScheduledTimeSlot(request.getScheduledTimeSlot() != null ? request.getScheduledTimeSlot() : "10:00 AM - 12:00 PM");
         booking.setAddress(request.getAddress());
-        booking.setCity(request.getCity() != null ? request.getCity() : "Delhi NCR");
+        booking.setCity(request.getCity() != null ? request.getCity() : "Hazaribagh (Main Town)");
         booking.setPincode(request.getPincode());
         booking.setContactPhone(request.getContactPhone());
         booking.setInstructions(request.getInstructions());
