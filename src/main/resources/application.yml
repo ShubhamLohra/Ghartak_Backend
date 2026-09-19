@@ -23,7 +23,6 @@ spring:
       settings:
         web-allow-others: true
   jpa:
-    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.H2Dialect}
     hibernate:
       ddl-auto: update
     show-sql: false
