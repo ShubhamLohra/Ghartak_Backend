@@ -44,8 +44,15 @@ public class Booking {
 
     private Double totalAmount;
     private Double taxesAndFee;
+    private Double commissionAmount = 0.0;
+    private Double providerPayout = 0.0;
+
     private String paymentMethod; // UPI, Cash on Delivery, Card, Net Banking
     private String paymentStatus; // PENDING, PAID, REFUNDED
+
+    private String cancelStage; // BOOKED_UNASSIGNED, ASSIGNED_BEFORE_DISPATCH, EN_ROUTE, ON_SITE
+    private String cancellationReason;
+    private String cancelledBy; // CUSTOMER, PROVIDER, ADMIN
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.BOOKED;
@@ -100,11 +107,26 @@ public class Booking {
     public Double getTaxesAndFee() { return taxesAndFee; }
     public void setTaxesAndFee(Double taxesAndFee) { this.taxesAndFee = taxesAndFee; }
 
+    public Double getCommissionAmount() { return commissionAmount; }
+    public void setCommissionAmount(Double commissionAmount) { this.commissionAmount = commissionAmount; }
+
+    public Double getProviderPayout() { return providerPayout; }
+    public void setProviderPayout(Double providerPayout) { this.providerPayout = providerPayout; }
+
     public String getPaymentMethod() { return paymentMethod; }
     public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
 
     public String getPaymentStatus() { return paymentStatus; }
     public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    public String getCancelStage() { return cancelStage; }
+    public void setCancelStage(String cancelStage) { this.cancelStage = cancelStage; }
+
+    public String getCancellationReason() { return cancellationReason; }
+    public void setCancellationReason(String cancellationReason) { this.cancellationReason = cancellationReason; }
+
+    public String getCancelledBy() { return cancelledBy; }
+    public void setCancelledBy(String cancelledBy) { this.cancelledBy = cancelledBy; }
 
     public Status getStatus() { return status; }
     public void setStatus(Status status) { this.status = status; }

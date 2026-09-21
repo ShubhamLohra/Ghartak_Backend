@@ -18,9 +18,13 @@ public class ServiceCategory {
     private String code;
     private String iconName;
     private String description;
-    private String badgeText; // e.g. "02+02", "Labour/Mistry/Contractor/Engineer", "01 (Afrin)"
-    private String categoryGroup; // Hardware, Home Care, Vehicle, Construction, Health
+    private String badgeText;
+    private String categoryGroup;
     private String bgGradient;
+
+    private Double baseCharge = 149.0;
+    private Double commissionRate = 15.0; // 15% or ₹150
+    private String commissionType = "PERCENTAGE"; // "PERCENTAGE" or "FIXED"
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ServiceItem> services = new ArrayList<>();
@@ -35,6 +39,13 @@ public class ServiceCategory {
         this.badgeText = badgeText;
         this.categoryGroup = categoryGroup;
         this.bgGradient = bgGradient;
+    }
+
+    public ServiceCategory(String name, String code, String iconName, String description, String badgeText, String categoryGroup, String bgGradient, Double baseCharge, Double commissionRate, String commissionType) {
+        this(name, code, iconName, description, badgeText, categoryGroup, bgGradient);
+        this.baseCharge = baseCharge;
+        this.commissionRate = commissionRate;
+        this.commissionType = commissionType;
     }
 
     public Long getId() { return id; }
@@ -60,6 +71,15 @@ public class ServiceCategory {
 
     public String getBgGradient() { return bgGradient; }
     public void setBgGradient(String bgGradient) { this.bgGradient = bgGradient; }
+
+    public Double getBaseCharge() { return baseCharge; }
+    public void setBaseCharge(Double baseCharge) { this.baseCharge = baseCharge; }
+
+    public Double getCommissionRate() { return commissionRate; }
+    public void setCommissionRate(Double commissionRate) { this.commissionRate = commissionRate; }
+
+    public String getCommissionType() { return commissionType; }
+    public void setCommissionType(String commissionType) { this.commissionType = commissionType; }
 
     public List<ServiceItem> getServices() { return services; }
     public void setServices(List<ServiceItem> services) { this.services = services; }
