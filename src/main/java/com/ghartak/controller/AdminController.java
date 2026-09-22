@@ -241,8 +241,9 @@ public class AdminController {
     @PostMapping("/providers")
     public ResponseEntity<User> onboardProvider(@RequestBody User provider) {
         provider.setRole(Role.SERVICE_PROVIDER);
-        if (provider.getRating() == null) provider.setRating(4.9);
+        if (provider.getRating() == null) provider.setRating(0.0);
         if (provider.getCompletedJobs() == null) provider.setCompletedJobs(0);
+        if (provider.getTotalEarnings() == null) provider.setTotalEarnings(0.0);
         if (provider.getDailyLeadsRemaining() == null) provider.setDailyLeadsRemaining(3);
         if (provider.getCreatedAt() == null) provider.setCreatedAt(LocalDateTime.now());
         

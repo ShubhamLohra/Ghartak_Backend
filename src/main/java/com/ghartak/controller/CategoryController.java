@@ -18,7 +18,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<List<ServiceCategory>> getAllCategories() {
-        return ResponseEntity.ok(categoryRepository.findAll());
+        return ResponseEntity.ok(categoryRepository.findAllWithServices());
     }
 
     @GetMapping("/{id}")
