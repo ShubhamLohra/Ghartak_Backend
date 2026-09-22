@@ -46,61 +46,76 @@ public class DataInitializer implements CommandLineRunner {
 
         System.out.println(">>> Initializing Ghar Tak Database with Services & Seed Data...");
 
-        // 1. Seed Users
-        User admin = new User("admin@ghartak.com", passwordEncoder.encode("admin123"), "GharTak Admin", "9876543210", "GharTak HQ, Main Road", "Hazaribagh", "825301", Role.ADMIN);
-        userRepository.save(admin);
+        // Clear orphan service items if categories were recreated
+        serviceItemRepository.deleteAll();
 
-        User customer = new User("user@ghartak.com", passwordEncoder.encode("user123"), "Shubham Kumar", "9811223344", "Flat 402, Lake View Apartments, Matwari", "Hazaribagh", "825301", Role.CUSTOMER);
-        userRepository.save(customer);
+        // 1. Seed Users (Safely check if existing before save)
+        User admin = userRepository.findByEmail("admin@ghartak.com").orElseGet(() -> 
+            userRepository.save(new User("admin@ghartak.com", passwordEncoder.encode("admin123"), "GharTak Admin", "9876543210", "GharTak HQ, Main Road", "Hazaribagh", "825301", Role.ADMIN))
+        );
 
-        User worker1 = new User("rajesh.electric@ghartak.com", passwordEncoder.encode("worker123"), "Rajesh Kumar (Senior Electrician)", "9988776655", "Korrah Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
-        worker1.setProfession("Electrician Services");
-        worker1.setRating(4.9);
-        worker1.setCompletedJobs(142);
-        worker1.setTotalEarnings(63900.0);
-        worker1.setDailyLeadsRemaining(3);
-        worker1.setCreatedAt(LocalDateTime.now().minusDays(180));
-        userRepository.save(worker1);
+        User customer = userRepository.findByEmail("user@ghartak.com").orElseGet(() -> 
+            userRepository.save(new User("user@ghartak.com", passwordEncoder.encode("user123"), "Shubham Kumar", "9811223344", "Flat 402, Lake View Apartments, Matwari", "Hazaribagh", "825301", Role.CUSTOMER))
+        );
 
-        User worker2 = new User("afrin.ceiling@ghartak.com", passwordEncoder.encode("worker123"), "Afrin Khan (False Ceiling Specialist)", "9955443322", "Boddom Bazar", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
-        worker2.setProfession("Interior & False Ceiling");
-        worker2.setRating(4.95);
-        worker2.setCompletedJobs(89);
-        worker2.setTotalEarnings(124500.0);
-        worker2.setDailyLeadsRemaining(3);
-        worker2.setCreatedAt(LocalDateTime.now().minusDays(120));
-        userRepository.save(worker2);
+        User worker1 = userRepository.findByEmail("rajesh.electric@ghartak.com").orElseGet(() -> {
+            User w = new User("rajesh.electric@ghartak.com", passwordEncoder.encode("worker123"), "Rajesh Kumar (Senior Electrician)", "9988776655", "Korrah Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            w.setProfession("Electrician Services");
+            w.setRating(4.9);
+            w.setCompletedJobs(142);
+            w.setTotalEarnings(63900.0);
+            w.setDailyLeadsRemaining(3);
+            w.setCreatedAt(LocalDateTime.now().minusDays(180));
+            return userRepository.save(w);
+        });
 
-        // Laundry Partners Enrolled
-        User laundryWorker1 = new User("ramesh.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Ramesh Sharma (Master Laundry Partner)", "9871122334", "Call Babu Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
-        laundryWorker1.setProfession("Laundry & Dry Cleaning");
-        laundryWorker1.setRating(4.9);
-        laundryWorker1.setCompletedJobs(178);
-        laundryWorker1.setTotalEarnings(53400.0);
-        laundryWorker1.setDailyLeadsRemaining(3);
-        laundryWorker1.setCreatedAt(LocalDateTime.now().minusDays(210));
-        userRepository.save(laundryWorker1);
+        User worker2 = userRepository.findByEmail("afrin.ceiling@ghartak.com").orElseGet(() -> {
+            User w = new User("afrin.ceiling@ghartak.com", passwordEncoder.encode("worker123"), "Afrin Khan (False Ceiling Specialist)", "9955443322", "Boddom Bazar", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            w.setProfession("Interior & False Ceiling");
+            w.setRating(4.95);
+            w.setCompletedJobs(89);
+            w.setTotalEarnings(124500.0);
+            w.setDailyLeadsRemaining(3);
+            w.setCreatedAt(LocalDateTime.now().minusDays(120));
+            return userRepository.save(w);
+        });
 
-        User laundryWorker2 = new User("sita.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Sita Verma (Express Steam Press Specialist)", "9872233445", "Canary Hill Road", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
-        laundryWorker2.setProfession("Laundry & Dry Cleaning");
-        laundryWorker2.setRating(4.85);
-        laundryWorker2.setCompletedJobs(94);
-        laundryWorker2.setTotalEarnings(28200.0);
-        laundryWorker2.setDailyLeadsRemaining(3);
-        laundryWorker2.setCreatedAt(LocalDateTime.now().minusDays(90));
-        userRepository.save(laundryWorker2);
+        User laundryWorker1 = userRepository.findByEmail("ramesh.laundry@ghartak.com").orElseGet(() -> {
+            User w = new User("ramesh.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Ramesh Sharma (Master Laundry Partner)", "9871122334", "Call Babu Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            w.setProfession("Laundry & Dry Cleaning");
+            w.setRating(4.9);
+            w.setCompletedJobs(178);
+            w.setTotalEarnings(53400.0);
+            w.setDailyLeadsRemaining(3);
+            w.setCreatedAt(LocalDateTime.now().minusDays(210));
+            return userRepository.save(w);
+        });
 
-        User plumberWorker = new User("suresh.plumber@ghartak.com", passwordEncoder.encode("worker123"), "Suresh Plumbing Works", "9873344556", "Demotand Area", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
-        plumberWorker.setProfession("Plumbing Services");
-        plumberWorker.setRating(4.8);
-        plumberWorker.setCompletedJobs(112);
-        plumberWorker.setTotalEarnings(44800.0);
-        plumberWorker.setDailyLeadsRemaining(3);
-        plumberWorker.setCreatedAt(LocalDateTime.now().minusDays(150));
-        userRepository.save(plumberWorker);
+        User laundryWorker2 = userRepository.findByEmail("sita.laundry@ghartak.com").orElseGet(() -> {
+            User w = new User("sita.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Sita Verma (Express Steam Press Specialist)", "9872233445", "Canary Hill Road", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            w.setProfession("Laundry & Dry Cleaning");
+            w.setRating(4.85);
+            w.setCompletedJobs(94);
+            w.setTotalEarnings(28200.0);
+            w.setDailyLeadsRemaining(3);
+            w.setCreatedAt(LocalDateTime.now().minusDays(90));
+            return userRepository.save(w);
+        });
 
-        User supplier = new User("supplier@ghartak.com", passwordEncoder.encode("supplier123"), "GharTak Hardware Depot Owner", "9899001122", "Industrial Estate, Pagmil", "Hazaribagh", "825301", Role.SUPPLIER);
-        userRepository.save(supplier);
+        User plumberWorker = userRepository.findByEmail("suresh.plumber@ghartak.com").orElseGet(() -> {
+            User w = new User("suresh.plumber@ghartak.com", passwordEncoder.encode("worker123"), "Suresh Plumbing Works", "9873344556", "Demotand Area", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            w.setProfession("Plumbing Services");
+            w.setRating(4.8);
+            w.setCompletedJobs(112);
+            w.setTotalEarnings(44800.0);
+            w.setDailyLeadsRemaining(3);
+            w.setCreatedAt(LocalDateTime.now().minusDays(150));
+            return userRepository.save(w);
+        });
+
+        User supplier = userRepository.findByEmail("supplier@ghartak.com").orElseGet(() -> 
+            userRepository.save(new User("supplier@ghartak.com", passwordEncoder.encode("supplier123"), "GharTak Hardware Depot Owner", "9899001122", "Industrial Estate, Pagmil", "Hazaribagh", "825301", Role.SUPPLIER))
+        );
 
         // 2. Seed All Service Categories & Base Charges / Commission Rules
         ServiceCategory electric = new ServiceCategory("Electrician Services", "ELECTRIC", "House electrician, ceiling fans, wiring, MCB & switchboard", 149.0, 15.0, "PERCENTAGE");

@@ -65,15 +65,20 @@ public class DataSourceConfig {
 
             // Handle explicit JDBC URL format: jdbc:postgresql://...
             if (trimmedUrl.startsWith("jdbc:")) {
-                config.setJdbcUrl(trimmedUrl);
-                String driver = System.getenv("SPRING_DATASOURCE_DRIVER");
-                config.setDriverClassName(driver != null ? driver : "org.postgresql.Driver");
-                config.setUsername(System.getenv("SPRING_DATASOURCE_USERNAME"));
-                config.setPassword(System.getenv("SPRING_DATASOURCE_PASSWORD"));
-                config.addDataSourceProperty("options", "-c timezone=UTC");
-                config.setMaximumPoolSize(5);
-                System.out.println(">>> Configured Explicit JDBC DataSource: " + config.getJdbcUrl());
-                return new HikariDataSource(config);
+                try {
+                    config.setJdbcUrl(trimmedUrl);
+                    String driver = System.getenv("SPRING_DATASOURCE_DRIVER");
+                    config.setDriverClassName(driver != null ? driver : "org.postgresql.Driver");
+                    config.setUsername(System.getenv("SPRING_DATASOURCE_USERNAME"));
+                    config.setPassword(System.getenv("SPRING_DATASOURCE_PASSWORD"));
+                    config.addDataSourceProperty("options", "-c timezone=UTC");
+                    config.setInitializationFailTimeout(3000);
+                    config.setMaximumPoolSize(5);
+                    System.out.println(">>> Configured Explicit JDBC DataSource: " + config.getJdbcUrl());
+                    return new HikariDataSource(config);
+                } catch (Exception e) {
+                    System.err.println(">>> Unable to connect to PostgreSQL (" + e.getMessage() + "). Falling back to Embedded H2 Database.");
+                }
             }
         }
 
