@@ -102,8 +102,8 @@ public class DataInitializer implements CommandLineRunner {
         User supplier = new User("supplier@ghartak.com", passwordEncoder.encode("supplier123"), "GharTak Hardware Depot Owner", "9899001122", "Industrial Estate, Pagmil", "Hazaribagh", "825301", Role.SUPPLIER);
         userRepository.save(supplier);
 
-        // 2. Seed All 12 Service Categories & Base Charges / Commission Rules
-        ServiceCategory electric = new ServiceCategory("Electrician Services", "ELECTRIC", "Zap", "House electrician, ceiling fans, wiring, MCB & switchboard", "02 + 01", "Hardware & Electrical", "from-amber-500 to-yellow-600", 149.0, 15.0, "PERCENTAGE");
+        // 2. Seed All Service Categories & Base Charges / Commission Rules
+        ServiceCategory electric = new ServiceCategory("Electrician Services", "ELECTRIC", "House electrician, ceiling fans, wiring, MCB & switchboard", 149.0, 15.0, "PERCENTAGE");
         categoryRepository.save(electric);
         serviceItemRepository.saveAll(Arrays.asList(
             new ServiceItem("Ceiling Fan Repair & Installation", "Diagnostic & repair of fan motor, regulator replacement, or new fan mounting", 199.0, 299.0, "30 mins", 4.9, 320, "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80", "per unit", true, electric),
@@ -111,24 +111,24 @@ public class DataInitializer implements CommandLineRunner {
             new ServiceItem("MCB & Switchboard Upgrade", "Replacement of old fuse boxes with modern trip MCB switches for safety", 349.0, 499.0, "45 mins", 4.9, 180, "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&w=600&q=80", "per board", true, electric)
         ));
 
-        ServiceCategory carpenter = new ServiceCategory("Carpenter Services", "CARPENTER", "Hammer", "Furniture repair, door latch, modular kitchen & custom woodwork", "01 + 01", "Hardware & Carpentry", "from-orange-500 to-amber-600", 199.0, 15.0, "PERCENTAGE");
+        ServiceCategory carpenter = new ServiceCategory("Carpenter Services", "CARPENTER", "Furniture repair, door latch, modular kitchen & custom woodwork", 199.0, 15.0, "PERCENTAGE");
         categoryRepository.save(carpenter);
         serviceItemRepository.saveAll(Arrays.asList(
             new ServiceItem("Door Lock & Latch Installation", "High-security lock fitting, handle repair, and alignment", 249.0, 399.0, "30 mins", 4.8, 150, "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=600&q=80", "per door", true, carpenter),
             new ServiceItem("Modular Kitchen Drawer & Hinge Repair", "Hydraulic soft-close hinge replacement and drawer track fixes", 399.0, 599.0, "1 Hour", 4.9, 95, "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80", "per cabinet", false, carpenter)
         ));
 
-        ServiceCategory plumber = new ServiceCategory("Plumbing Services", "PLUMBER", "Droplet", "Tap repair, pipe leakages, drain blockage & water tank deep cleaning", "01", "Hardware & Plumbing", "from-yellow-400 to-amber-600", 149.0, 15.0, "PERCENTAGE");
+        ServiceCategory plumber = new ServiceCategory("Plumbing Services", "PLUMBER", "Tap repair, pipe leakages, drain blockage & water tank deep cleaning", 149.0, 15.0, "PERCENTAGE");
         categoryRepository.save(plumber);
         serviceItemRepository.saveAll(Arrays.asList(
             new ServiceItem("Tap & Shower Leakage Repair", "Washer replacement, cartridge fix, faucet replacement", 149.0, 249.0, "20 mins", 4.9, 580, "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80", "per faucet", true, plumber),
             new ServiceItem("Drain & Basin Blockage Clearance", "High pressure spring clearance for kitchen sink or bathroom drain", 299.0, 449.0, "30 mins", 4.8, 410, "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=600&q=80", "per line", true, plumber)
         ));
 
-        ServiceCategory building = new ServiceCategory("Building Repair & Construction", "BUILDING_REPAIR", "Building", "Hire certified Labour (02), Mistry (02), Contractor (01), Engineer (04)", "Labour 02 | Mistry 02", "Construction & Structural", "from-yellow-600 to-orange-600", 499.0, 10.0, "PERCENTAGE");
+        ServiceCategory building = new ServiceCategory("Building Repair & Construction", "BUILDING_REPAIR", "Hire certified Labour, Mistry, Contractor, Engineer", 499.0, 10.0, "PERCENTAGE");
         categoryRepository.save(building);
 
-        ServiceCategory laundry = new ServiceCategory("Laundry & Dry Cleaning", "LAUNDRY", "Shirt", "Doorstep pickup for wash & fold, suit dry cleaning, steam press & shoe spa", "02 Partners Enrolled", "Home Care", "from-indigo-500 to-sky-600", 149.0, 15.0, "PERCENTAGE");
+        ServiceCategory laundry = new ServiceCategory("Laundry & Dry Cleaning", "LAUNDRY", "Doorstep pickup for wash & fold, suit dry cleaning, steam press & shoe spa", 149.0, 15.0, "PERCENTAGE");
         categoryRepository.save(laundry);
         serviceItemRepository.saveAll(Arrays.asList(
             new ServiceItem("Wash & Fold", "Eco-friendly detergent wash and neat fold", 80.0, 100.0, "24 Hours", 4.9, 140, "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80", "per kg", true, laundry),

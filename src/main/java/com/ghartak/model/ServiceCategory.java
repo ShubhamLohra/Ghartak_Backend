@@ -16,11 +16,7 @@ public class ServiceCategory {
     private String name;
 
     private String code;
-    private String iconName;
     private String description;
-    private String badgeText;
-    private String categoryGroup;
-    private String bgGradient;
 
     private Double baseCharge = 149.0;
     private Double commissionRate = 15.0; // 15% or ₹150
@@ -31,18 +27,14 @@ public class ServiceCategory {
 
     public ServiceCategory() {}
 
-    public ServiceCategory(String name, String code, String iconName, String description, String badgeText, String categoryGroup, String bgGradient) {
+    public ServiceCategory(String name, String code, String description) {
         this.name = name;
         this.code = code;
-        this.iconName = iconName;
         this.description = description;
-        this.badgeText = badgeText;
-        this.categoryGroup = categoryGroup;
-        this.bgGradient = bgGradient;
     }
 
-    public ServiceCategory(String name, String code, String iconName, String description, String badgeText, String categoryGroup, String bgGradient, Double baseCharge, Double commissionRate, String commissionType) {
-        this(name, code, iconName, description, badgeText, categoryGroup, bgGradient);
+    public ServiceCategory(String name, String code, String description, Double baseCharge, Double commissionRate, String commissionType) {
+        this(name, code, description);
         this.baseCharge = baseCharge;
         this.commissionRate = commissionRate;
         this.commissionType = commissionType;
@@ -57,20 +49,8 @@ public class ServiceCategory {
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }
 
-    public String getIconName() { return iconName; }
-    public void setIconName(String iconName) { this.iconName = iconName; }
-
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
-
-    public String getBadgeText() { return badgeText; }
-    public void setBadgeText(String badgeText) { this.badgeText = badgeText; }
-
-    public String getCategoryGroup() { return categoryGroup; }
-    public void setCategoryGroup(String categoryGroup) { this.categoryGroup = categoryGroup; }
-
-    public String getBgGradient() { return bgGradient; }
-    public void setBgGradient(String bgGradient) { this.bgGradient = bgGradient; }
 
     public Double getBaseCharge() { return baseCharge; }
     public void setBaseCharge(Double baseCharge) { this.baseCharge = baseCharge; }
