@@ -269,6 +269,31 @@ public class AdminController {
         return ResponseEntity.ok(saved);
     }
 
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody ServiceCategory categoryDetails) {
+        return categoryRepository.findById(id).map(existing -> {
+            if (categoryDetails.getName() != null) existing.setName(categoryDetails.getName());
+            if (categoryDetails.getCategoryGroup() != null) existing.setCategoryGroup(categoryDetails.getCategoryGroup());
+            if (categoryDetails.getBaseCharge() != null) existing.setBaseCharge(categoryDetails.getBaseCharge());
+            if (categoryDetails.getCommissionRate() != null) existing.setCommissionRate(categoryDetails.getCommissionRate());
+            if (categoryDetails.getCommissionType() != null) existing.setCommissionType(categoryDetails.getCommissionType());
+            if (categoryDetails.getDescription() != null) existing.setDescription(categoryDetails.getDescription());
+            if (categoryDetails.getCode() != null) existing.setCode(categoryDetails.getCode());
+            
+            ServiceCategory updated = categoryRepository.save(existing);
+            return ResponseEntity.ok(updated);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
+        if (categoryRepository.existsById(id)) {
+            categoryRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/notifications")
     public ResponseEntity<List<AdminNotification>> getNotifications() {
         return ResponseEntity.ok(notificationRepository.findAllByOrderByCreatedAtDesc());
