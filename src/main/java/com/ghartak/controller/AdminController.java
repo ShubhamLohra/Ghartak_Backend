@@ -294,6 +294,48 @@ public class AdminController {
         return ResponseEntity.notFound().build();
     }
 
+    // Service Options & Pricing Management
+    @PostMapping("/services")
+    public ResponseEntity<?> saveServiceItem(@RequestParam Long categoryId, @RequestBody ServiceItem serviceItem) {
+        return categoryRepository.findById(categoryId).map(category -> {
+            serviceItem.setCategory(category);
+            if (serviceItem.getOriginalPrice() == null) serviceItem.setOriginalPrice(serviceItem.getPrice());
+            if (serviceItem.getRating() == null) serviceItem.setRating(4.8);
+            if (serviceItem.getReviewCount() == null) serviceItem.setReviewCount(50);
+            if (serviceItem.getUnitType() == null) serviceItem.setUnitType("per job");
+            if (serviceItem.getIsPopular() == null) serviceItem.setIsPopular(false);
+            
+            ServiceItem saved = serviceItemRepository.save(serviceItem);
+            return ResponseEntity.ok(saved);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/services/{id}")
+    public ResponseEntity<?> updateServiceItem(@PathVariable Long id, @RequestBody ServiceItem itemDetails) {
+        return serviceItemRepository.findById(id).map(existing -> {
+            if (itemDetails.getTitle() != null) existing.setTitle(itemDetails.getTitle());
+            if (itemDetails.getDescription() != null) existing.setDescription(itemDetails.getDescription());
+            if (itemDetails.getPrice() != null) existing.setPrice(itemDetails.getPrice());
+            if (itemDetails.getOriginalPrice() != null) existing.setOriginalPrice(itemDetails.getOriginalPrice());
+            if (itemDetails.getUnitType() != null) existing.setUnitType(itemDetails.getUnitType());
+            if (itemDetails.getDuration() != null) existing.setDuration(itemDetails.getDuration());
+            if (itemDetails.getImageUrl() != null) existing.setImageUrl(itemDetails.getImageUrl());
+            if (itemDetails.getIsPopular() != null) existing.setIsPopular(itemDetails.getIsPopular());
+            
+            ServiceItem updated = serviceItemRepository.save(existing);
+            return ResponseEntity.ok(updated);
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/services/{id}")
+    public ResponseEntity<?> deleteServiceItem(@PathVariable Long id) {
+        if (serviceItemRepository.existsById(id)) {
+            serviceItemRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/notifications")
     public ResponseEntity<List<AdminNotification>> getNotifications() {
         return ResponseEntity.ok(notificationRepository.findAllByOrderByCreatedAtDesc());

@@ -107,7 +107,7 @@ public class DataInitializer implements CommandLineRunner {
         categoryRepository.save(electric);
         serviceItemRepository.saveAll(Arrays.asList(
             new ServiceItem("Ceiling Fan Repair & Installation", "Diagnostic & repair of fan motor, regulator replacement, or new fan mounting", 199.0, 299.0, "30 mins", 4.9, 320, "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80", "per unit", true, electric),
-            new ServiceItem("Full House Electric Checkup & Wiring Fix", "Comprehensive inspection of short circuits, main MCB box, and socket replacement", 499.0, 799.0, "2 Hours", 4.8, 210, "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80", "per visit", false, electric),
+            new ServiceItem("Full House Electric Checkup & Wiring Fix", "Comprehensive checkup of short circuits, main MCB box, and socket replacement", 499.0, 799.0, "2 Hours", 4.8, 210, "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80", "per visit", false, electric),
             new ServiceItem("MCB & Switchboard Upgrade", "Replacement of old fuse boxes with modern trip MCB switches for safety", 349.0, 499.0, "45 mins", 4.9, 180, "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&w=600&q=80", "per board", true, electric)
         ));
 
@@ -128,8 +128,14 @@ public class DataInitializer implements CommandLineRunner {
         ServiceCategory building = new ServiceCategory("Building Repair & Construction", "BUILDING_REPAIR", "Building", "Hire certified Labour (02), Mistry (02), Contractor (01), Engineer (04)", "Labour 02 | Mistry 02", "Construction & Structural", "from-yellow-600 to-orange-600", 499.0, 10.0, "PERCENTAGE");
         categoryRepository.save(building);
 
-        ServiceCategory laundry = new ServiceCategory("Laundry & Dry Cleaning", "LAUNDRY", "Shirt", "Doorstep pickup for 5kg wash & fold, suit dry cleaning, steam press & shoe spa", "02 Partners Enrolled", "Home Care", "from-indigo-500 to-sky-600", 149.0, 15.0, "PERCENTAGE");
+        ServiceCategory laundry = new ServiceCategory("Laundry & Dry Cleaning", "LAUNDRY", "Shirt", "Doorstep pickup for wash & fold, suit dry cleaning, steam press & shoe spa", "02 Partners Enrolled", "Home Care", "from-indigo-500 to-sky-600", 149.0, 15.0, "PERCENTAGE");
         categoryRepository.save(laundry);
+        serviceItemRepository.saveAll(Arrays.asList(
+            new ServiceItem("Wash & Fold", "Eco-friendly detergent wash and neat fold", 80.0, 100.0, "24 Hours", 4.9, 140, "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80", "per kg", true, laundry),
+            new ServiceItem("Wash + Iron", "Deep wash with crisp steam press ironing", 120.0, 150.0, "24 Hours", 4.8, 98, "https://images.unsplash.com/photo-1489274495757-95c7c837b101?auto=format&fit=crop&w=600&q=80", "per kg", true, laundry),
+            new ServiceItem("Dry Clean Shirt", "Gentle solvent dry cleaning & premium hanger packaging", 100.0, 140.0, "48 Hours", 4.9, 210, "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=600&q=80", "per piece", false, laundry),
+            new ServiceItem("Dry Clean Suit", "2-Piece or 3-Piece suit dry cleaning with stain treatment", 300.0, 400.0, "48 Hours", 4.9, 310, "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80", "per piece", true, laundry)
+        ));
 
         // 3. Seed Raw Materials
         rawMaterialRepository.saveAll(Arrays.asList(
