@@ -31,6 +31,8 @@ public class User {
     private Role role = Role.CUSTOMER;
 
     private String profession; // For Service Providers (Electrician, Carpenter, etc.)
+    private String designation; // Professional Title e.g. Senior Electrician, Master Plumber
+
     private Double rating = 4.8;
     private Integer completedJobs = 0;
     private Double totalEarnings = 0.0;
@@ -80,6 +82,9 @@ public class User {
 
     public String getProfession() { return profession; }
     public void setProfession(String profession) { this.profession = profession; }
+
+    public String getDesignation() { return designation; }
+    public void setDesignation(String designation) { this.designation = designation; }
 
     public Double getRating() { return rating; }
     public void setRating(Double rating) { this.rating = rating; }

@@ -59,8 +59,9 @@ public class DataInitializer implements CommandLineRunner {
         );
 
         User worker1 = userRepository.findByEmail("rajesh.electric@ghartak.com").orElseGet(() -> {
-            User w = new User("rajesh.electric@ghartak.com", passwordEncoder.encode("worker123"), "Rajesh Kumar (Senior Electrician)", "9988776655", "Korrah Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            User w = new User("rajesh.electric@ghartak.com", passwordEncoder.encode("worker123"), "Rajesh Kumar", "9988776655", "Korrah Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
             w.setProfession("Electrician Services");
+            w.setDesignation("Senior Electrician");
             w.setRating(4.9);
             w.setCompletedJobs(142);
             w.setTotalEarnings(63900.0);
@@ -70,8 +71,9 @@ public class DataInitializer implements CommandLineRunner {
         });
 
         User worker2 = userRepository.findByEmail("afrin.ceiling@ghartak.com").orElseGet(() -> {
-            User w = new User("afrin.ceiling@ghartak.com", passwordEncoder.encode("worker123"), "Afrin Khan (False Ceiling Specialist)", "9955443322", "Boddom Bazar", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            User w = new User("afrin.ceiling@ghartak.com", passwordEncoder.encode("worker123"), "Afrin Khan", "9955443322", "Boddom Bazar", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
             w.setProfession("Interior & False Ceiling");
+            w.setDesignation("False Ceiling Specialist");
             w.setRating(4.95);
             w.setCompletedJobs(89);
             w.setTotalEarnings(124500.0);
@@ -81,8 +83,9 @@ public class DataInitializer implements CommandLineRunner {
         });
 
         User laundryWorker1 = userRepository.findByEmail("ramesh.laundry@ghartak.com").orElseGet(() -> {
-            User w = new User("ramesh.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Ramesh Sharma (Master Laundry Partner)", "9871122334", "Call Babu Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
+            User w = new User("ramesh.laundry@ghartak.com", passwordEncoder.encode("worker123"), "Ramesh Sharma", "9871122334", "Call Babu Chowk", "Hazaribagh", "825301", Role.SERVICE_PROVIDER);
             w.setProfession("Laundry & Dry Cleaning");
+            w.setDesignation("Master Laundry Partner");
             w.setRating(4.9);
             w.setCompletedJobs(178);
             w.setTotalEarnings(53400.0);
