@@ -273,7 +273,6 @@ public class AdminController {
     public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody ServiceCategory categoryDetails) {
         return categoryRepository.findById(id).map(existing -> {
             if (categoryDetails.getName() != null) existing.setName(categoryDetails.getName());
-            if (categoryDetails.getCategoryGroup() != null) existing.setCategoryGroup(categoryDetails.getCategoryGroup());
             if (categoryDetails.getBaseCharge() != null) existing.setBaseCharge(categoryDetails.getBaseCharge());
             if (categoryDetails.getCommissionRate() != null) existing.setCommissionRate(categoryDetails.getCommissionRate());
             if (categoryDetails.getCommissionType() != null) existing.setCommissionType(categoryDetails.getCommissionType());
